@@ -2,7 +2,8 @@
 const Header = () => {
     return (
         <div>
-            Header.jsx
+            <button>Home</button>
+            <button>My profile</button>
         </div>
     )
 }

@@ -22,7 +22,7 @@ const Home = () => {
     return (
         <div>
             {destinations.map((destination, index) => {
-                return <DestinationCard key={destination.id} destinationInfo={destination} example='example text'/>
+                return <DestinationCard key={destination.id} destinationInfo={destination} />
             })}
         </div>
     )

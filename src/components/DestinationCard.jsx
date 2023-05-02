@@ -1,12 +1,14 @@
+import './DestinationCard.css'
 
-const DestinationCard = ({destinationInfo, example}) => {
-    const {name, imageURL, internation, notes} = destinationInfo
+const DestinationCard = ({destinationInfo}) => {
+    const {name, imageURL, international, notes} = destinationInfo
     console.log(destinationInfo)
     return (
-        <div>
+        <div className="destination-card-container">
             <h1>{name}</h1>
             <img src={imageURL}/>
-            {example}
+            <p>International: {international ? 'true' : 'false'}</p>
+            <p>{notes}</p>
         </div>
     )
 }
