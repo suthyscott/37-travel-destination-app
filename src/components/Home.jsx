@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import axios from 'axios'
-// import {REACT_APP_TRAVEL_DESTINATION_KEY} = process.env
+import DestinationCard from "./DestinationCard"
 
-// console.log(REACT_APP_TRAVEL_DESTINATION_KEY)
 const Home = () => {
     const [destinations, setDestinations] = useState([])
 
@@ -18,12 +17,13 @@ const Home = () => {
 
     useEffect(() => {
         getDestinations()
-        // another function
     }, [])
 
     return (
         <div>
-            Home.jsx
+            {destinations.map((destination, index) => {
+                return <DestinationCard key={destination.id} destinationInfo={destination} example='example text'/>
+            })}
         </div>
     )
 }
