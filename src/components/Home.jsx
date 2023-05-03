@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 import DestinationCard from "./DestinationCard"
-import './Home.css'
+import "./Home.css"
 
 const Home = () => {
     const [destinations, setDestinations] = useState([])
     const [wishList, setWishList] = useState([])
+    const [showAll, setShowAll] = useState(true)
 
     const getDestinations = () => {
         console.log("in getDestinations")
@@ -29,32 +30,35 @@ const Home = () => {
     }
 
     return (
-        <div id='home-container'>
-            <div>
-                All Destinations
-                {destinations.map((destination, index) => {
-                    return (
-                        <DestinationCard
-                            key={destination.id}
-                            destinationInfo={destination}
-                            addToWishList={addToWishList}
-                        />
-                    )
-                })}
-            </div>
-
-            <div>
-                Wishlist
-                {wishList.map((destination, index) => {
-                    return (
-                        <DestinationCard
-                            key={destination.id}
-                            destinationInfo={destination}
-                            addToWishList={addToWishList}
-                        />
-                    )
-                })}
-            </div>
+        <div id="home-container">
+            <button onClick={() => setShowAll(!showAll)}>{showAll ? 'See my Wishlist' : 'See all destinations'}</button>
+            {showAll ? (
+                <div>
+                    All Destinations
+                    {destinations.map((destination, index) => {
+                        return (
+                            <DestinationCard
+                                key={destination.id}
+                                destinationInfo={destination}
+                                addToWishList={addToWishList}
+                            />
+                        )
+                    })}
+                </div>
+            ) : (
+                <div>
+                    Wishlist
+                    {wishList.map((destination, index) => {
+                        return (
+                            <DestinationCard
+                                key={destination.id}
+                                destinationInfo={destination}
+                                addToWishList={addToWishList}
+                            />
+                        )
+                    })}
+                </div>
+            )}
         </div>
     )
 }

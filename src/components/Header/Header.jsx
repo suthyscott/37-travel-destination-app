@@ -1,10 +1,9 @@
-
+import './Header.css'
 const Header = () => {
     return (
-        <div>
-            <button>Home</button>
-            <button>My profile</button>
-        </div>
+        <header id='main-header'>
+            <h1>Travel Destination App</h1>
+        </header>
     )
 }
 
