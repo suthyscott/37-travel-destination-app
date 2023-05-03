@@ -1,6 +1,6 @@
 import './DestinationCard.css'
 
-const DestinationCard = ({destinationInfo}) => {
+const DestinationCard = ({destinationInfo, addToWishList}) => {
     const {name, imageURL, international, notes} = destinationInfo
     console.log(destinationInfo)
     return (
@@ -9,6 +9,7 @@ const DestinationCard = ({destinationInfo}) => {
             <img src={imageURL}/>
             <p>International: {international ? 'true' : 'false'}</p>
             <p>{notes}</p>
+            <button onClick={() => addToWishList(destinationInfo)}>Add To Wish List</button>
         </div>
     )
 }

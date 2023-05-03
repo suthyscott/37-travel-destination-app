@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react"
-import axios from 'axios'
+import axios from "axios"
 import DestinationCard from "./DestinationCard"
+import './Home.css'
 
 const Home = () => {
     const [destinations, setDestinations] = useState([])
+    const [wishList, setWishList] = useState([])
 
     const getDestinations = () => {
-        console.log('in getDestinations')
-        axios.get(`http://localhost:4545/api/destinations?apiKey=${process.env.REACT_APP_TRAVEL_DESTINATION_KEY}`)
+        console.log("in getDestinations")
+        axios
+            .get(
+                `http://localhost:4545/api/destinations?apiKey=${process.env.REACT_APP_TRAVEL_DESTINATION_KEY}`
+            )
             .then(res => {
                 console.log(res)
                 setDestinations(res.data)
@@ -19,11 +24,37 @@ const Home = () => {
         getDestinations()
     }, [])
 
+    const addToWishList = destination => {
+        setWishList([...wishList, destination])
+    }
+
     return (
-        <div>
-            {destinations.map((destination, index) => {
-                return <DestinationCard key={destination.id} destinationInfo={destination} />
-            })}
+        <div id='home-container'>
+            <div>
+                All Destinations
+                {destinations.map((destination, index) => {
+                    return (
+                        <DestinationCard
+                            key={destination.id}
+                            destinationInfo={destination}
+                            addToWishList={addToWishList}
+                        />
+                    )
+                })}
+            </div>
+
+            <div>
+                Wishlist
+                {wishList.map((destination, index) => {
+                    return (
+                        <DestinationCard
+                            key={destination.id}
+                            destinationInfo={destination}
+                            addToWishList={addToWishList}
+                        />
+                    )
+                })}
+            </div>
         </div>
     )
 }
