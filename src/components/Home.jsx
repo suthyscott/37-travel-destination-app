@@ -33,7 +33,7 @@ const Home = () => {
         <div id="home-container">
             <button onClick={() => setShowAll(!showAll)}>{showAll ? 'See my Wishlist' : 'See all destinations'}</button>
             {showAll ? (
-                <div>
+                <>
                     All Destinations
                     {destinations.map((destination, index) => {
                         return (
@@ -44,9 +44,9 @@ const Home = () => {
                             />
                         )
                     })}
-                </div>
+                </>
             ) : (
-                <div>
+                <>
                     Wishlist
                     {wishList.map((destination, index) => {
                         return (
@@ -57,7 +57,7 @@ const Home = () => {
                             />
                         )
                     })}
-                </div>
+                </>
             )}
         </div>
     )
