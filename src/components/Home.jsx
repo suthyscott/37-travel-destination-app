@@ -7,6 +7,7 @@ const Home = () => {
     const [destinations, setDestinations] = useState([])
     const [wishList, setWishList] = useState([])
     const [showAll, setShowAll] = useState(true)
+    const [searchInput, setSearchInput] = useState("")
 
     const getDestinations = () => {
         console.log("in getDestinations")
@@ -30,21 +31,42 @@ const Home = () => {
     }
 
     return (
-        <div id="home-container">
-            <button onClick={() => setShowAll(!showAll)}>{showAll ? 'See my Wishlist' : 'See all destinations'}</button>
+        <main id="home-container">
+            <button onClick={() => setShowAll(!showAll)}>
+                {showAll ? "See my Wishlist" : "See all destinations"}
+            </button>
+            <div>
+                <label>Search for a destination:</label>
+                <input
+                    placeholder="type destination name or keyword"
+                    onChange={e => setSearchInput(e.target.value)}
+                    value={searchInput}
+                />
+            </div>
             {showAll ? (
-                <>
-                    All Destinations
-                    {destinations.map((destination, index) => {
-                        return (
-                            <DestinationCard
-                                key={destination.id}
-                                destinationInfo={destination}
-                                addToWishList={addToWishList}
-                            />
-                        )
-                    })}
-                </>
+                <div id="cards-container">
+                    
+                    {destinations
+                        .filter(destination => {
+                            return (
+                                destination.name
+                                    .toLowerCase()
+                                    .includes(searchInput.toLowerCase()) ||
+                                destination.notes
+                                    .toLowerCase()
+                                    .includes(searchInput.toLowerCase())
+                            )
+                        })
+                        .map((destination, index) => {
+                            return (
+                                <DestinationCard
+                                    key={destination.id}
+                                    destinationInfo={destination}
+                                    addToWishList={addToWishList}
+                                />
+                            )
+                        })}
+                </div>
             ) : (
                 <>
                     Wishlist
@@ -59,7 +81,7 @@ const Home = () => {
                     })}
                 </>
             )}
-        </div>
+        </main>
     )
 }
 
