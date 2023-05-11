@@ -54,6 +54,12 @@ const AddDestination = () => {
 
   const submitHandler = values => {
     console.log(values)
+
+    axios.post(`http://localhost:4545/api/destinations?apiKey=${process.env.REACT_APP_TRAVEL_DESTINATION_KEY}`, values)
+          .then(res => {
+            console.log(res)
+          })
+          .catch(err => console.log(err))
   }
 
   return (
@@ -62,11 +68,12 @@ const AddDestination = () => {
         {(params) => {
           const {values, handleChange, handleSubmit} = params
           return (
-            <form>
+            <form onSubmit={handleSubmit}>
               <input placeholder='Destination name' value={values.name} onChange={handleChange} name='name'/>
-              <input/>
-              <input/>
-              <input/>
+              <input placeholder='Paste an image url' value={values.imageURL} onChange={handleChange} name='imageURL'/>
+              <input type='checkbox' value={values.international} onChange={handleChange} name='international'/>
+              <input placeholder='Enter some notes' value={values.notes} onChange={handleChange} name='notes'/>
+              <button>submit</button>
             </form>
           )
         }}
