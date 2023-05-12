@@ -42,8 +42,10 @@
 import {useState} from 'react'
 import axios from 'axios'
 import {Formik} from 'formik'
+import { useNavigate } from 'react-router-dom'
 
 const AddDestination = () => {
+  const navigate = useNavigate()
 
   const initialValues = {
     name: '',
@@ -52,12 +54,15 @@ const AddDestination = () => {
     notes: ''
   }
 
-  const submitHandler = values => {
+  const submitHandler = (values, {resetForm}) => {
     console.log(values)
 
     axios.post(`http://localhost:4545/api/destinations?apiKey=${process.env.REACT_APP_TRAVEL_DESTINATION_KEY}`, values)
           .then(res => {
             console.log(res)
+            navigate(`/details/${res.data.id}`)
+            // resetForm({values: ''})
+            // alert("your destination was added!")
           })
           .catch(err => console.log(err))
   }
